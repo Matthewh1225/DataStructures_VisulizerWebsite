@@ -31,23 +31,52 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 9.2em;
   line-height: 1.1;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  /* 3D raised effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3),
+              0 2px 4px rgba(0, 0, 0, 0.2);
+  
+  /* Optional: subtle gradient for depth */
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  
+  /* Optional: border highlight on top */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  border: 5px solid transparent;
+  height: 5.5em;
+  width: 5.5em; ;
+  font-size: 6em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f700f7;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  box-shadow: 0 0 20px rgba(227, 80, 247, 0.6),
+        0 0 40px rgba(250, 250, 252, 0.4),
+         0 8px 16px rgba(0, 0, 0, 0.3);
+  
+  /* 3D lift effect */
+  transform: translateY(-2px);
+  
+  /* Border glow */
+  border-color: #ff64ff;
+  
+  /* Brightness boost */
+  filter: brightness(1.1);
+}
+button:active {
+  /* Push down when clicked */
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 button:focus,
 button:focus-visible {
@@ -56,13 +85,56 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #771a5b;
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #faedfa;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #f0a0d8;
   }
+}
+
+button.loginSubmitbtn {
+  position: absolute;
+  top: 39.2%;
+  left: 46%;
+  border-radius: 9999px !important;
+  background: #023a47 !important;
+  cursor: crosshair;
+  filter: drop-shadow(0 0 .2em #f8f8fa62)!important;
+  height: 2.5em !important;
+  width: 8em !important;
+  font-size: 1.2em !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+  box-shadow: none !important;
+}
+button.loginSubmitbtn:hover {
+  filter: drop-shadow(0 0 .2em #f8fafcf6)!important;
+  transform: scale(1.1);
+  border-color: #023a47;
+}
+.LoginHeader {
+  position: absolute;
+  font-size: 3em;
+  top: 20%;
+  left: 47%;
+  color: #cececeb4;
+  margin-bottom: 0.5em;
+}
+.loginInput{
+  position: relative;
+  top:-200px;
+  right: 0px;
+  height: 2em;
+  width: 15em;
+  font-size: 1.5em;
+  margin: 0.1em;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
 }
