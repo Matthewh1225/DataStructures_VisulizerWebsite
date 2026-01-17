@@ -1,0 +1,87 @@
+/* Styles for the Login component */
+.LoginHeader {
+  position: absolute;
+  font-size: 5em;
+  top:30px;
+  left: 660px;
+  color: #cececeb4;
+  margin-bottom: 0.5em;
+}
+.PasswordInput{
+  background-color: #242424;
+  position: absolute;
+  right: 550px;
+    top:245px;
+
+  height: 2em;
+  width: 15em;
+  font-size: 1.5em;
+  margin: 0.1em;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+}
+.loginInput{
+  background-color: #242424;
+  position: absolute;
+    top:190px;
+
+  right: 550px;
+  height: 2em;
+  width: 15em;
+  font-size: 1.5em;
+  margin: 0.1em;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  
+}
+button.loginSubmitbtn {
+  z-index: 1000;
+  position: absolute;
+  top:363px;
+  right: 630px;
+  border-radius: 9999px !important;
+  background: #151515 !important;
+  cursor: crosshair;
+  filter: drop-shadow(0 0 .2em #f8f8fa62)!important;
+  height: 2.5em !important;
+  width: 15em !important;
+  font-size: 15px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+  box-shadow: none !important;
+}
+button.loginSubmitbtn:hover {
+  filter: drop-shadow(0 0 .2em #f8fafcf6)!important;
+  transform: scale(1.1);
+  border-color: #3a3a3ac2;
+}
+button.ToggleButton {
+  position: absolute;
+  top:250px;
+  right: 505px;
+  border-radius: 10px !important;
+  border-color: #83838362 !important;
+  background: #47474762 !important;
+  cursor: crosshair;
+  height: 47px;
+  width: 47px;
+  font-size: 2em !important;
+  display: flex;
+  align-items: center;
+}
+button.ToggleButton:hover {
+  filter: drop-shadow(0 0 .2em #000000f6)!important;
+  transform: scale(1.1);
+  border-color: #000000;
+}
+.EyeIcon {
+  top: 300px;
+  color: #12e323aa;
+}
+.EyeSlahIcon {
+  color: #ff2e2e;
+}

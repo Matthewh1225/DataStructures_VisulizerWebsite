@@ -24,8 +24,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -36,6 +35,7 @@ h1 {
 }
 
 button {
+  position: absolute;
   /* 3D raised effect */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3),
               0 2px 4px rgba(0, 0, 0, 0.2);
@@ -94,47 +94,4 @@ button:focus-visible {
   button {
     background-color: #f0a0d8;
   }
-}
-
-button.loginSubmitbtn {
-  position: absolute;
-  top: 39.2%;
-  left: 46%;
-  border-radius: 9999px !important;
-  background: #023a47 !important;
-  cursor: crosshair;
-  filter: drop-shadow(0 0 .2em #f8f8fa62)!important;
-  height: 2.5em !important;
-  width: 8em !important;
-  font-size: 1.2em !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none !important;
-  box-shadow: none !important;
-}
-button.loginSubmitbtn:hover {
-  filter: drop-shadow(0 0 .2em #f8fafcf6)!important;
-  transform: scale(1.1);
-  border-color: #023a47;
-}
-.LoginHeader {
-  position: absolute;
-  font-size: 3em;
-  top: 20%;
-  left: 47%;
-  color: #cececeb4;
-  margin-bottom: 0.5em;
-}
-.loginInput{
-  position: relative;
-  top:-200px;
-  right: 0px;
-  height: 2em;
-  width: 15em;
-  font-size: 1.5em;
-  margin: 0.1em;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
 }

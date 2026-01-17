@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import './Login.css';
+import { FaEye,FaEyeSlash } from 'react-icons/fa6';
 export default function Login() {
   // State for email, password, and feedback message
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [showpass,setshowpass]=useState(false);
+  const togglepass =()=>{ setshowpass(!showpass);}
   const navigate = useNavigate();
+
 
   // Handle login form submission
   const handleLogin = async (e: React.FormEvent) => {
@@ -57,8 +61,8 @@ export default function Login() {
         <input 
           id="login-password"
           name="password"
-          className="loginInput" 
-          type="password" 
+          className="PasswordInput" 
+          type= {showpass ? "text":"password" }
           placeholder="Password" 
           required 
           value={password}
@@ -66,6 +70,8 @@ export default function Login() {
         />
         {/* Login button */}
         <button className="loginSubmitbtn" type="submit">Login</button>
+        {/* <button className='eyeIconSlash' type="button" onClick={togglepass}>{showpass ? < FaEyeSlash/> : <FaEye/>}</button> */}
+        <button className='ToggleButton' type="button" onClick={togglepass}>{showpass ? < FaEyeSlash className='EyeSlahIcon'/> : <FaEye className='EyeIcon'/>}</button>
       </form>
       {/* Display feedback message */}
       {message && <p style={{ marginTop: '10px', color: 'white' }}>{message}</p>}

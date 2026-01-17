@@ -1,12 +1,21 @@
 import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
-import sqlite3 from 'sqlite3';
+import pg from 'pg';
 
+const { Pool } = pg;
 const app = express();
 const PORT = process.env.PORT || 4000;
-const DB_PATH = './data.sqlite';
-const db = new sqlite3.Database(DB_PATH);
+
+// PostgreSQL connection pool
+const pool = new Pool({
+  database: 'datastructures_visualizer',
+  // If you set a password during postgres setup, uncomment below:
+  // user: 'your_username',
+  // password: 'your_password',
+  // host: 'localhost',
+  // port: 5432,
+});
 
 app.use(cors({
   origin: ['http://localhost:5173', 'http://localhost:5174'],
@@ -15,35 +24,22 @@ app.use(cors({
 app.use(express.json());
 
 // Initialize DB schema
-function initDb() {
-  db.run(
-    `CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      username TEXT UNIQUE NOT NULL,
-      password_hash TEXT NOT NULL,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )`
-  );
+async function initDb() {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(255) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    console.log('Database initialized');
+  } catch (err) {
+    console.error('Error initializing database:', err);
+  }
 }
 initDb();
-
-function run(query, params = []) {
-  return new Promise((resolve, reject) => {
-    db.run(query, params, function (err) {
-      if (err) reject(err);
-      else resolve(this);
-    });
-  });
-}
-
-function get(query, params = []) {
-  return new Promise((resolve, reject) => {
-    db.get(query, params, (err, row) => {
-      if (err) reject(err);
-      else resolve(row);
-    });
-  });
-}
 
 app.post('/signup', async (req, res) => {
   const { username, password } = req.body || {};
@@ -52,10 +48,13 @@ app.post('/signup', async (req, res) => {
   }
   try {
     const hash = await bcrypt.hash(password, 10);
-    await run('INSERT INTO users (username, password_hash) VALUES (?, ?)', [username.trim(), hash]);
+    await pool.query(
+      'INSERT INTO users (username, password_hash) VALUES ($1, $2)',
+      [username.trim(), hash]
+    );
     res.status(201).json({ ok: true });
   } catch (err) {
-    if (err && err.message && err.message.includes('UNIQUE')) {
+    if (err.code === '23505') { // Unique violation code in Postgres
       return res.status(409).json({ error: 'username already exists' });
     }
     console.error('Signup error:', err);
@@ -71,10 +70,13 @@ app.post('/admin/add-user', async (req, res) => {
   }
   try {
     const hash = await bcrypt.hash(password, 10);
-    await run('INSERT INTO users (username, password_hash) VALUES (?, ?)', [username.trim(), hash]);
+    await pool.query(
+      'INSERT INTO users (username, password_hash) VALUES ($1, $2)',
+      [username.trim(), hash]
+    );
     res.status(201).json({ ok: true });
   } catch (err) {
-    if (err && err.message && err.message.includes('UNIQUE')) {
+    if (err.code === '23505') {
       return res.status(409).json({ error: 'username already exists' });
     }
     console.error('Admin add user error:', err);
@@ -88,7 +90,12 @@ app.post('/login', async (req, res) => {
     return res.status(400).json({ error: 'username and password are required' });
   }
   try {
-    const user = await get('SELECT * FROM users WHERE username = ?', [username.trim()]);
+    const result = await pool.query(
+      'SELECT * FROM users WHERE username = $1',
+      [username.trim()]
+    );
+    const user = result.rows[0];
+    
     if (!user) {
       return res.status(401).json({ error: 'invalid_credentials' });
     }
@@ -105,15 +112,29 @@ app.post('/login', async (req, res) => {
 
 // Simple users list endpoint (dev only)
 app.get('/users', async (_req, res) => {
-  db.all('SELECT id, username, created_at FROM users', [], (err, rows) => {
-    if (err) {
-      console.error('Users list error:', err);
-      return res.status(500).json({ error: 'list_failed' });
-    }
-    res.json(rows);
-  });
+  try {
+    const result = await pool.query('SELECT id, username, created_at FROM users');
+    res.json(result.rows);
+  } catch (err) {
+    console.error('Users list error:', err);
+    return res.status(500).json({ error: 'list_failed' });
+  }
 });
 
+// POST /bcrypt: Hash a password sent in the request body
+app.post('/bcrypt', async (req, res) => {
+  const { password } = req.body || {};
+  if (!password) {
+    return res.status(400).json({ error: 'password is required' });
+  }
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    res.json({ hashedPassword });
+  } catch (err) {
+    console.error('Bcrypt error:', err);
+    res.status(500).json({ error: 'bcrypt_failed' });
+  }
+});
 // Ignore Chrome DevTools well-known requests
 app.get('/.well-known/*', (_req, res) => res.status(204).end());
 
