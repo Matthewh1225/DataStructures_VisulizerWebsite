@@ -1,4 +1,4 @@
-bimport express from 'express';
+import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import pg from 'pg';
@@ -10,11 +10,10 @@ const PORT = process.env.PORT || 4000;
 // PostgreSQL connection pool
 const pool = new Pool({
   database: 'datastructures_visualizer',
-  // If you set a password during postgres setup, uncomment below:
-  // user: 'your_username',
-  // password: 'your_password',
-  // host: 'localhost',
-  // port: 5432,
+  user: 'Matthewhuckman',
+  password: 'Cat',
+  host: '127.0.0.1',
+  port: 5432,
 });
 
 app.use(cors({
