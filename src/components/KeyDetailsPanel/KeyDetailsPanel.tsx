@@ -11,7 +11,7 @@ export default function KeyDetailsPanel() {
       </div>
       <div className="key-details-panel">
         <div>
-          <button className='SubmitButton'>Search</button>
+          <button className='SearchButton'>Search</button>
         </div>
         <div>
           <BiCarousel className='KeyDetailsIcon'/>

@@ -1,0 +1,53 @@
+.SignUpContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+}
+.SignUpContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Input-UserName, .Input-Email, .Input-Password {
+    width: 300px;
+    padding: 10px;
+    margin: 2px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.SignUpButton {
+    width: 150px;
+    padding: 2px;
+    background-color: #646cff;
+    color: white;
+    margin-top: 10px;
+    border: none;
+    border-radius: 1px;
+    font-size: 18px;
+    cursor: pointer;
+}
+.SignUpButton:hover {
+    background-color: #535bf2;
+}   
+button.ToggleButton {
+  position: absolute;
+  top:250px;
+  right: 505px;
+  border-radius: 10px !important;
+  border-color: #83838362 !important;
+  background: #47474762 !important;
+  cursor: crosshair;
+  height: 47px;
+  width: 47px;
+  font-size: 2em !important;
+  display: flex;
+  align-items: center;
+}
+button.ToggleButton:hover {
+  filter: drop-shadow(0 0 .2em #000000f6)!important;
+  transform: scale(1.1);
+  border-color: #000000;
+}

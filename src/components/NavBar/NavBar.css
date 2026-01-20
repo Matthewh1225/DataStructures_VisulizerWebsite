@@ -43,3 +43,33 @@
     color: #b5b5b5;
 
 }
+.logoutbutton {
+ color : #7d7d7d;
+    border-radius: 12px;
+    border-color: #39025c79;
+    position: absolute;
+    right: 210px;
+    font-size: 2.5em;
+    font-weight: bold;
+    background: none;
+    cursor: pointer;
+}
+.logoutbutton:hover {
+    font-size: 2.8em;
+    color: #b5b5b5;
+}
+.SignUp{
+    color : #7d7d7d;
+    border-radius: 12px;
+    border-color: #39025c79;
+    position: absolute;
+    right: 60px;
+    font-size: 2.5em;
+    font-weight: bold;
+    background: none;
+    cursor: pointer;
+}
+.SignUp:hover {
+    font-size: 2.8em;
+    color: #b5b5b5;
+}
