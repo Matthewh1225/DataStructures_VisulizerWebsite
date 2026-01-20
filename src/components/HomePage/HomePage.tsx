@@ -3,6 +3,7 @@ import './HomePage.css';
 import { useNavigate } from 'react-router-dom';
 import CatFace from '../../assets/CatFace.png';
 import NavBar from '../NavBar/NavBar';
+import Carousel from '../Carousel/Carousel'
 // App styles are now imported globally in main.tsx
 
 /**
@@ -97,6 +98,7 @@ export default function HomePage() {
       <NavBar />
       <div>
         <h2>Welcome to the Home Page!</h2>
+        <Carousel />
         <img src={CatFace} className="App-logo" alt="logo" />
 
         <div className="counter-container">
