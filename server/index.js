@@ -30,6 +30,7 @@ async function initDb() {
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
         username VARCHAR(255) UNIQUE NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
         password_hash VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
@@ -42,15 +43,15 @@ async function initDb() {
 initDb();
 
 app.post('/signup', async (req, res) => {
-  const { username, password } = req.body || {};
-  if (!username || !password) {
-    return res.status(400).json({ error: 'username and password are required' });
+  const { username, password, email } = req.body || {};
+  if (!username || !password || !email) {
+    return res.status(400).json({ error: 'username, password and email are required' });
   }
   try {
     const hash = await bcrypt.hash(password, 10);
     await pool.query(
-      'INSERT INTO users (username, password_hash) VALUES ($1, $2)',
-      [username.trim(), hash]
+      'INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3)',
+      [username.trim(), email.trim(), hash]
     );
     res.status(201).json({ ok: true });
   } catch (err) {
@@ -64,15 +65,15 @@ app.post('/signup', async (req, res) => {
 
 // Dev/admin helper to add a user (no auth; restrict in production)
 app.post('/admin/add-user', async (req, res) => {
-  const { username, password } = req.body || {};
-  if (!username || !password) {
-    return res.status(400).json({ error: 'username and password are required' });
+  const { username, password, email } = req.body || {};
+  if (!username || !password || !email) {
+    return res.status(400).json({ error: 'username, password and email are required' });
   }
   try {
     const hash = await bcrypt.hash(password, 10);
     await pool.query(
-      'INSERT INTO users (username, password_hash) VALUES ($1, $2)',
-      [username.trim(), hash]
+      'INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3)',
+      [username.trim(), email.trim(), hash]
     );
     res.status(201).json({ ok: true });
   } catch (err) {
@@ -113,7 +114,7 @@ app.post('/login', async (req, res) => {
 // Simple users list endpoint (dev only)
 app.get('/users', async (_req, res) => {
   try {
-    const result = await pool.query('SELECT id, username, created_at FROM users');
+    const result = await pool.query('SELECT id, username, email, created_at FROM users');
     res.json(result.rows);
   } catch (err) {
     console.error('Users list error:', err);

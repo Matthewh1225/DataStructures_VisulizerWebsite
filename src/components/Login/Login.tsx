@@ -53,8 +53,7 @@ export default function Login() {
           className="loginInput" 
           type="text" 
           placeholder="Username" 
-          required 
-          value={username}
+          required value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         {/* Password input field */}
@@ -64,8 +63,7 @@ export default function Login() {
           className="PasswordInput" 
           type= {showpass ? "text":"password" }
           placeholder="Password" 
-          required 
-          value={password}
+          required value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         {/* Login button */}

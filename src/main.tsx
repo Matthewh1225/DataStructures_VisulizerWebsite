@@ -1,14 +1,13 @@
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './styles/global.css';
-import './styles/App.css';
-import App from './App.tsx';
+import HomePage from './components/HomePage/HomePage';
 import KeyDetailsPanel from './components/KeyDetailsPanel/KeyDetailsPanel';
 import Login from './components/Login/Login';
 import Verification from './components/Verification/Verification';
+import SignUp from './components/SignUp/SignUp';
 
-// Development helper functions for backend user management (browser console only)
-// Example: window.addUser('newUser', 'password123')
+// Example: window.addUser('newuser', 'password123')
 (window as any).addUser = async (username: string, password: string) => {
   const response = await fetch('http://localhost:4000/admin/add-user', {
     method: 'POST',
@@ -37,6 +36,7 @@ import Verification from './components/Verification/Verification';
   console.table(users);
   return users;
 };
+// Example: window.doBcrypt('password123')
 (window as any).doBcrypt= async(password:string)=>{
   const response = await fetch('http://localhost:4000/bcrypt',{
     method:'POST',
@@ -57,8 +57,9 @@ createRoot(document.getElementById('root')!).render(
     <Routes>
       <Route path="/" element={<Verification />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/Home"  element={<App />} />
+      <Route path="/Home"  element={<HomePage />} />
       <Route path="/KeyDetailsPanel" element={<KeyDetailsPanel/>} />
+      <Route path="/SignUp" element={<SignUp/>} />
     </Routes>
   </BrowserRouter>
 );

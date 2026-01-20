@@ -37,6 +37,7 @@ export function createUsersTable() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       username TEXT UNIQUE NOT NULL,
       password TEXT NOT NULL
+      email TEXT UNIQUE NOT NULL
     );
   `;
   db.run(sql);
@@ -81,7 +82,7 @@ function persistDB() {
 // Expose a function to list users from the browser console
 (window as any).listUsers = () => {
   try {
-    const rows = query("SELECT id, username, password FROM users ORDER BY id", []);
+    const rows = query("SELECT id, username, password, email FROM users ORDER BY id", []);
     console.table(rows);
     return rows;
   } catch (err) {
