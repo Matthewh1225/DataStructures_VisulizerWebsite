@@ -11,11 +11,11 @@ import HomeScreen from './components/HomeScreen/HomeScreen';
 // Expose admin utility functions to the global window object for easy access in the browser console
 
 // Example: window.addUser('newuser', 'password123')
-(window as any).addUser = async (username: string, password: string) => {
+(window as any).addUser = async (username: string, password: string, email: string, role: string) => {
   const response = await fetch('http://localhost:4000/admin/add-user', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ username, password, email,role})
   });
 
   if (!response.ok) {
@@ -38,6 +38,20 @@ import HomeScreen from './components/HomeScreen/HomeScreen';
   const users = await response.json();
   console.table(users);
   return users;
+};
+// Example: window.removeUser('usernameToRemove')
+(window as any).removeUser = async (username: string) => {
+  const response = await fetch('http://localhost:4000/admin/remove-user', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username })
+  });
+  if (!response.ok) {
+    const responseBody = await response.json().catch(() => ({} as any));
+    console.error('removeUser failed', responseBody.error || response.statusText);
+    return;
+  }
+  console.log(`User ${username} removed.`);
 };
 // Example: window.doBcrypt('password123')
 (window as any).doBcrypt= async(password:string)=>{

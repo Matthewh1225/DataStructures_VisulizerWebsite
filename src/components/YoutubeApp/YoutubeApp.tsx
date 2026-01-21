@@ -46,7 +46,7 @@ export default function YoutubeAppWindow() {
         }}>
           <button style={{ float: 'right', margin: 8 }} onClick={() => setOpen(false)}>X</button>
           <iframe
-            src="https://web.archive.org/web/20080101000000/https://www.youtube.com/"
+            src="https://web.archive.org/web/200150101000000/https://www.youtube.com/"
             style={{ width: '100%', height: '95%', border: 'none' }}
           />
         </div>

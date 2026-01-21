@@ -35,6 +35,20 @@ async function initDb() {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
+    // Ensure 'matt' admin user exists
+    const adminUsername = 'Matt';
+    const adminEmail = 'matt@example.com';
+    const adminPassword = 'cat'; // Change this to a secure password
+    const adminRole = 'admin';
+    const result = await pool.query('SELECT * FROM users WHERE username = $1', [adminUsername]);
+    if (result.rows.length === 0) {
+      const hash = await bcrypt.hash(adminPassword, 10);
+      await pool.query(
+        'INSERT INTO users (username, email, password_hash, role) VALUES ($1, $2, $3, $4)',
+        [adminUsername, adminEmail, hash, adminRole]
+      );
+      console.log('Admin user "matt" created');
+    }
     console.log('Database initialized');
   } catch (err) {
     console.error('Error initializing database:', err);
@@ -138,6 +152,24 @@ app.post('/bcrypt', async (req, res) => {
 });
 // Ignore Chrome DevTools well-known requests
 app.get('/.well-known/*', (_req, res) => res.status(204).end());
+
+// Remove user by username (admin only)
+app.post('/admin/remove-user', async (req, res) => {
+  const { username } = req.body;
+  if (!username) {
+    return res.status(400).json({ error: 'Username required' });
+  }
+  try {
+    const result = await pool.query('DELETE FROM users WHERE username = $1', [username]);
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json({ message: `User ${username} removed.` });
+  } catch (err) {
+    console.error('Error removing user:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Auth API running on http://localhost:${PORT}`);
