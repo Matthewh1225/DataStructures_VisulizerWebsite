@@ -1,0 +1,46 @@
+.TaskBar-Container {
+    position: relative;
+    top: 745px;
+    left: -120px;
+    width: 1473px;
+    height: 75px;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+.TaskBar Logo {
+    background-color: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+.Windows-Logo {
+    top: -10px;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.taskbar-text{
+    font:bold;
+    font-size: 20px;
+    position: relative;
+    top: -5px;
+    right: 20px;
+    font-size: 1em;
+    color: white;
+
+}
+.texttaskbar{
+   position: relative;
+   top: -10px;
+    border-radius: 99px;
+    height: 45px;
+    width: 200px;
+    background-color: #69676792;
+    color: rgb(212, 212, 212);
+    font-size: 20px;
+}

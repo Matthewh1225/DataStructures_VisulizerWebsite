@@ -8,10 +8,10 @@
     color: #b2b1b1b4;
     width:800px;
 }
-/* .TestButton{
+.SearchButton{
     position: absolute;
-    top: 80dvh;
-    left: 50%;
+    top: 200px;
+    right: 30px;
     transform: translateX(-50%);
     height: 3em;
     width: 10em;
@@ -22,11 +22,11 @@
     border: none;
     cursor: pointer;
 }
-.TestButton:hover{
+.SearchButton:hover{
     background-color: #535bf2;
     filter: drop-shadow(0 0 1em rgba(93, 73, 245, 0.6));
 
-} */
+}
 .KeyDetailsSearchBar{
     position: absolute;
     top: 100px;
@@ -45,7 +45,8 @@
 }
 .KeyDetailsSearchBar:hover{
     filter:drop-shadow 0 0 1em rgba(100, 108, 255, 0.6);
-}.SubmitButton{
+ }
+ /*.SubmitButton{
     position: absolute;
     top: 200px;
     right: 150px;
@@ -62,7 +63,7 @@
     scale: 1.1;
     background-color: #535bf2;
     filter: drop-shadow(0 0 1em rgba(93, 73, 245, 0.6));
-}
+} */
 .KeyDetailsTitle{
     position: absolute;
     top: 300px;

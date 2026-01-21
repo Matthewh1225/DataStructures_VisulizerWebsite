@@ -26,3 +26,42 @@
     margin-bottom: 2px;
     padding: 0 20px;
 }
+.SnakeAppContainer {
+    position: absolute;
+    top: 100px;
+    left: 10px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.snake-text {
+    position: relative;
+    right: 680px;
+    top: 200px;
+    font-size: 1em;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 2px;
+    padding: 0 20px;
+}
+
+.windows-logo-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 50;
+}
+
+.windows-logo-container button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.windows-logo {
+    width: 50px;
+    height: 50px;
+}

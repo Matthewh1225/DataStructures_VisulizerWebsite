@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import './Carousel.css';
 // Carousel component to display a horizontal scrolling list of images
 export default function Carousel() {
-    const [images, setImages] = useState<string[]>([]);
     const [startIdx, setStartIdx] = useState(0);
     // Dynamically import all images from the assets folder
-    useEffect(() => {
+    const images = useMemo(() => {
         const imported = import.meta.glob('/src/assets/*.{jpg,png,JPG,PNG}', { eager: true });
-        const imgs = Object.values(imported).map((mod: any) => mod.default);
-        setImages(imgs);
+        return Object.values(imported).map((mod: any) => mod.default);
     }, []);
 
     if (images.length === 0) return null;

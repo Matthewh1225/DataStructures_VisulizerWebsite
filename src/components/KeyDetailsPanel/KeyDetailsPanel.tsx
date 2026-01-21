@@ -1,6 +1,5 @@
 import './KeyDetailsPanel.css';
 import NavBar from '../NavBar/NavBar';
-import { BiCarousel } from 'react-icons/bi';
 export default function KeyDetailsPanel() {
   return (
     <>
@@ -14,7 +13,6 @@ export default function KeyDetailsPanel() {
           <button className='SearchButton'>Search</button>
         </div>
         <div>
-          <BiCarousel className='KeyDetailsIcon'/>
         </div>
         <p className='KeyDetailsTitle'>This panel will display key details about the selected data structure or algorithm.</p>
 
