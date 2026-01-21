@@ -43,7 +43,8 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <>
+    <div className="LoginContainer">
       <h1 className="LoginHeader">Login</h1>
       <form onSubmit={handleLogin}>
         {/* Username input field */}
@@ -57,22 +58,26 @@ export default function Login() {
           onChange={(e) => setUsername(e.target.value)}
         />
         {/* Password input field */}
-        <input 
-          id="login-password"
-          name="password"
-          className="PasswordInput" 
-          type= {showpass ? "text":"password" }
-          placeholder="Password" 
-          required value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {/* Login button */}
-        <button className="loginSubmitbtn" type="submit">Login</button>
-        {/* <button className='eyeIconSlash' type="button" onClick={togglepass}>{showpass ? < FaEyeSlash/> : <FaEye/>}</button> */}
-        <button className='ToggleButton' type="button" onClick={togglepass}>{showpass ? < FaEyeSlash className='EyeSlahIcon'/> : <FaEye className='EyeIcon'/>}</button>
+        <div className="password-field">
+          <input 
+            id="login-password"
+            name="password"
+            className="PasswordInput" 
+            type= {showpass ? "text":"password" }
+            placeholder="Password" 
+            required value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className='Toggle-Button' type="button" onClick={togglepass}>{showpass ? < FaEyeSlash className='EyeSlahIcon'/> : <FaEye className='EyeIcon'/>}</button>
+        </div>
+        <div className="login-form-row">
+          {/* Login button */}
+          <button className="loginSubmitbtn" type="submit">Login</button>
+        </div>
       </form>
       {/* Display feedback message */}
       {message && <p style={{ marginTop: '10px', color: 'white' }}>{message}</p>}
     </div>
+    </>
   );
 }

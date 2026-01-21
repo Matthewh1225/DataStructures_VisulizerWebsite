@@ -12,13 +12,11 @@ export default function HomeScreen () {
             <div>
                 <TaskBar />
             </div>
-            <div className="snake-app-container">
+            <div className="Snake-App-Container">
                 <SnakeApp />
                 <p className="snake-text">snake</p>
             </div >
-            <div className='SnakeAppContainer'>   
-            </div>
-            <div className="youtube-app-container">
+            <div className="Youtube-App-Container">
                 <YoutubeApp />
                 <p className="youtube-text">youtube</p>
             </div >

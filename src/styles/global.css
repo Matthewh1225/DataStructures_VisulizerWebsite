@@ -22,23 +22,25 @@
   color: #888;
 }
 /* Global styles for the entire app (resets, body, html, root, headings, links, etc.) */
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* background-color removed to allow particles background */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+body, html {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background: transparent !important;
 }
 
 a {
@@ -63,8 +65,4 @@ h1 {
   }
   a:hover {
     color: #faedfa;
-  }
-  button {
-    background-color: #f0a0d8;
-  }
-}
+  }}

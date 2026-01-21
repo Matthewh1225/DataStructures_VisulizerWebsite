@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./SnakeApp.css";
+import { TbRuler2Off } from "react-icons/tb";
 
 
   const SnakeApp: React.FC = () => {
@@ -143,65 +144,55 @@ import "./SnakeApp.css";
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [direction]);
 
-  if (!visible) {
     return (
-      <button
-        onClick={() => setVisible(true)}
-        className="snake-button"
-        style={{
-          background: 'none',
-          border: 'none',
-          padding: 0,
-          margin: 0,
-          boxShadow: 'none',
-          cursor: 'pointer',
-        }}
-        aria-label="Open Snake Game"
-      >
-        🐍
-      </button>
+      <>
+        <button
+          onClick={() => !visible && setVisible(true)}
+          className={"snake-button" + (visible ? " snake-button--open" : "")}
+          aria-label="Open Snake Game"
+          tabIndex={visible ? -1 : 0}
+        >
+          🐍
+        </button>
+        {visible && (
+          <div className="snake-game-overlay">
+            <button
+              className="close-btn"
+              onClick={() => setVisible(false)}
+              aria-label="Close Snake Game"
+            >
+              ×
+            </button>
+            <p className="snake-score">Score: {score}</p>
+            <canvas ref={canvasRef} width={canvasSize} height={canvasSize}></canvas>
+            {countdown !== null && (
+              <div className="countdown-overlay">
+                <h2 className="countdown-text">{countdown === 0 ? "Go!" : countdown}</h2>
+              </div>
+            )}
+            {gameOver && (
+              <div className="game-over-overlay">
+                <h2>Game Over!</h2>
+                <p className="final-score">Your score: {score}</p>
+                <button
+                  className="play-again-btn"
+                  onClick={() => {
+                    setSnake([{ x: 200, y: 200 }]);
+                    setFood({ x: 100, y: 100 });
+                    setDirection("RIGHT");
+                    setScore(0);
+                    setGameOver(false);
+                    setCountdown(3);
+                  }}
+                >
+                  Play Again
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </>
     );
-  }
-
-  return (
-    <div className="snake-game" style={{ position: "relative", display: "inline-block" }}>
-      <button
-        className="close-btn"
-        style={{ position: "absolute", top: 8, right: 8, zIndex: 2 }}
-        onClick={() => setVisible(false)}
-        aria-label="Close Snake Game"
-      >
-        ×
-      </button>
-      <h1>Snake Game</h1>
-      <p>Score: {score}</p>
-      <canvas ref={canvasRef} width={canvasSize} height={canvasSize}></canvas>
-      {countdown !== null && (
-        <div className="countdown-overlay" style={{ position: "absolute", top: 0, left: 0, width: canvasSize, height: canvasSize, background: "rgba(0,0,0,0.7)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", zIndex: 3 }}>
-          <h2 style={{ color: "white", fontSize: "48px" }}>{countdown === 0 ? "Go!" : countdown}</h2>
-        </div>
-      )}
-      {gameOver && (
-        <div className="game-over-overlay" style={{ position: "absolute", top: 0, left: 0, width: canvasSize, height: canvasSize, background: "rgba(0,0,0,0.7)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", zIndex: 4 }}>
-          <h2 style={{ color: "white" }}>Game Over!</h2>
-          <p style={{ color: "white" }}>Your score: {score}</p>
-          <button
-            onClick={() => {
-              setSnake([{ x: 200, y: 200 }]);
-              setFood({ x: 100, y: 100 });
-              setDirection("RIGHT");
-              setScore(0);
-              setGameOver(false);
-              setCountdown(3);
-            }}
-            style={{ padding: "10px 20px", fontSize: "16px", marginTop: "10px" }}
-          >
-            Play Again
-          </button>
-        </div>
-      )}
-    </div>
-  );
 };
 
 export default SnakeApp;

@@ -1,30 +1,123 @@
-.snake-game {
+.snake-score {
+  position: relative;
+  font-size: 1.2rem;
+  color: #222;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.final-score {
+  position: relative;
+  top: -20px;
+  font-size: 1.2rem;
+  color: #ffdddd;
+  font-weight: bold;  
+}
+
+.snake-game-overlay {
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: #f0f0f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  width: 420px;
+  height: 500px;
+  box-sizing: border-box;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  margin: 0;
-  padding: 20px;
 }
 
-h1 {
-  margin: 20px 0;
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.countdown-overlay {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  width: 420px;
+  height: 100px;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.countdown-text {
+  position: relative;
+  top: 20%;
+  color: white;
+  font-size: 48px;
+}
+
+.game-over-overlay {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  width: 420px;
+  height: 130px;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+
+.game-over-overlay h2,
+.game-over-overlay p {
+  color: white;
+}
+
+.play-again-btn {
+  position: relative;
+  top: -30px;
+  margin-top: 0px;
+  font-size: 26px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 canvas {
-  border: 1px solid #000;
+  border: 10px solid #252525;
 }
 .snake-button {
-   top: 170px;
-   right:680px;
+    top: 170px;
+    right: 880px;
     position: relative;
     scale: 5;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
+    background: none;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
 }
+
+.snake-button--open {
+  opacity: 1 !important;
+  pointer-events: none;
+}
+
+  .snake-button--open {
+    /* Prevent opacity drop when game is open */
+    opacity: 1 !important;
+    pointer-events: none;
+  }
