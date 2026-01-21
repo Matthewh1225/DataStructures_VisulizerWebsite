@@ -6,6 +6,9 @@ import KeyDetailsPanel from './components/KeyDetailsPanel/KeyDetailsPanel';
 import Login from './components/Login/Login';
 import Verification from './components/Verification/Verification';
 import SignUp from './components/SignUp/SignUp';
+import HomeScreen from './components/HomeScreen/HomeScreen';
+
+// Expose admin utility functions to the global window object for easy access in the browser console
 
 // Example: window.addUser('newuser', 'password123')
 (window as any).addUser = async (username: string, password: string) => {
@@ -60,6 +63,8 @@ createRoot(document.getElementById('root')!).render(
       <Route path="/Home"  element={<HomePage />} />
       <Route path="/KeyDetailsPanel" element={<KeyDetailsPanel/>} />
       <Route path="/SignUp" element={<SignUp/>} />
+      <Route path="/HomeScreen" element={<HomeScreen/>} />
+
     </Routes>
   </BrowserRouter>
 );

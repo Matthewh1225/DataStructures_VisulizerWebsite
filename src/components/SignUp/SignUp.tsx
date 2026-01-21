@@ -15,15 +15,17 @@ export default function SignUp() {
   const [showpass, setshowpass] = useState(false);
   const togglepass = () => { setshowpass(!showpass); };
   const navigate = useNavigate();
+  const authUser = JSON.parse(localStorage.getItem('authUser') || '{}');
+  const isAdmin = authUser.role === 'admin';
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage('');
     const authUser = localStorage.getItem('authUser');
-    if (authUser) {
+    if (authUser && !isAdmin) {
       setMessage('You are already logged in.');
       // Optionally send them home instead of trying to sign up again
       // navigate('/Home');
-      return;
+      return; 
     }
     try {
       const trimmedUsername = username.trim();

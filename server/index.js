@@ -31,6 +31,7 @@ async function initDb() {
         username VARCHAR(255) UNIQUE NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
         password_hash VARCHAR(255) NOT NULL,
+        role VARCHAR(50) DEFAULT 'user',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
@@ -49,8 +50,8 @@ app.post('/signup', async (req, res) => {
   try {
     const hash = await bcrypt.hash(password, 10);
     await pool.query(
-      'INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3)',
-      [username.trim(), email.trim(), hash]
+      'INSERT INTO users (username, email, password_hash, role) VALUES ($1, $2, $3, $4)',
+      [username.trim(), email.trim(), hash, 'user']
     );
     res.status(201).json({ ok: true });
   } catch (err) {
@@ -64,15 +65,15 @@ app.post('/signup', async (req, res) => {
 
 // Dev/admin helper to add a user (no auth; restrict in production)
 app.post('/admin/add-user', async (req, res) => {
-  const { username, password, email } = req.body || {};
+  const { username, password, email, role = 'user' } = req.body || {};
   if (!username || !password || !email) {
     return res.status(400).json({ error: 'username, password and email are required' });
   }
   try {
     const hash = await bcrypt.hash(password, 10);
     await pool.query(
-      'INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3)',
-      [username.trim(), email.trim(), hash]
+      'INSERT INTO users (username, email, password_hash, role) VALUES ($1, $2, $3, $4)',
+      [username.trim(), email.trim(), hash, role]
     );
     res.status(201).json({ ok: true });
   } catch (err) {
@@ -103,7 +104,7 @@ app.post('/login', async (req, res) => {
     if (!ok) {
       return res.status(401).json({ error: 'invalid_credentials' });
     }
-    res.json({ ok: true, user: { id: user.id, username: user.username } });
+    res.json({ ok: true, user: { id: user.id, username: user.username, role: user.role } });
   } catch (err) {
     console.error('Login error:', err);
     res.status(500).json({ error: 'login_failed' });
@@ -113,7 +114,7 @@ app.post('/login', async (req, res) => {
 // Simple users list endpoint (dev only)
 app.get('/users', async (_req, res) => {
   try {
-    const result = await pool.query('SELECT id, username, email, created_at FROM users');
+    const result = await pool.query('SELECT id, username, email, role, created_at FROM users');
     res.json(result.rows);
   } catch (err) {
     console.error('Users list error:', err);

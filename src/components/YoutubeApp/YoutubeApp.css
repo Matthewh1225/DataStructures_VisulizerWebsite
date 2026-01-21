@@ -1,0 +1,8 @@
+.youtube-logo{
+  width: 10em;
+  transition: filter 300ms, height 300ms;
+  background: none;
+  margin: 0;
+  cursor: pointer;
+  background: none;
+}
