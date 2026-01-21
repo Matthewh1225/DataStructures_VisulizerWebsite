@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './HomePage.css';
+import '../Carousel/Carousel.css';
 import { useNavigate } from 'react-router-dom';
 import CatFace from '../../assets/CatFace.png';
 import NavBar from '../NavBar/NavBar';
@@ -11,8 +12,15 @@ import Carousel from '../Carousel/Carousel'
  * Features: Session management, audio controls, animations
  */
 export default function HomePage() {
-  // ==================== STATE AND REFS ====================
-  const [clickCount, setClickCount] = useState(1);
+    const [images, setImages] = useState<string[]>([]);
+    const [clickCount, setClickCount] = useState(0);
+
+    useEffect(() => {
+        const imported = import.meta.glob('/src/assets/*.{jpg,png,JPG,PNG}', { eager: true });
+        const imgs = Object.values(imported).map((mod: any) => mod.default);
+        setImages(imgs);
+        setClickCount(imgs.length);
+    }, []);
 //   const [isMusicButtonMinimized, setIsMusicButtonMinimized] = useState(false);
 //   const audioElementRef = useRef<HTMLAudioElement>(null);
   const navigate = useNavigate();
@@ -98,12 +106,11 @@ export default function HomePage() {
       <NavBar />
       <div>
         <h2>Welcome to the Home Page!</h2>
+        <div className="Carousel-container">
         <Carousel />
-        <img src={CatFace} className="App-logo" alt="logo" />
-
+        </div>
         <div className="counter-container">
           <button
-            onClick={() => setClickCount((currentCount) => currentCount * 2 ** 34)}
             className="counter-button"
           >
             count is {clickCount}

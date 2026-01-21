@@ -55,52 +55,6 @@ h1 {
   line-height: 1.1;
 }
 
-/* Add more global styles as needed */
-
-/* --- Merged from index.css --- */
-/* Global button styles, but NOT for NavBar buttons */
-button:not(.logoutbutton):not(.HomeLink):not(.SignUp):not(.KeyDetailsPanelLink):not(.ToggleButton):not(.SearchButton):not(.counter-button){
-  position: absolute;
-  /* 3D raised effect */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3),
-              0 2px 4px rgba(0, 0, 0, 0.2);
-  /* Optional: subtle gradient for depth */
-  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-  /* Optional: border highlight on top */
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
-  border-radius: 50%;
-  border: 5px solid transparent;
-  height: 5.5em;
-  width: 5.5em; ;
-  font-size: 6em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #f700f7;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  box-shadow: 0 0 20px rgba(227, 80, 247, 0.6),
-        0 0 40px rgba(250, 250, 252, 0.4),
-         0 8px 16px rgba(0, 0, 0, 0.3);
-  /* 3D lift effect */
-  transform: translateY(-2px);
-  /* Border glow */
-  border-color: #ff64ff;
-  /* Brightness boost */
-  filter: brightness(1.1);
-}
-button:active {
-  /* Push down when clicked */
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
 @media (prefers-color-scheme: light) {
   :root {
