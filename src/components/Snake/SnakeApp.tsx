@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import "./SnakeApp.css";
-import { TbRuler2Off } from "react-icons/tb";
 
+const snakeLogo = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='10' y='30' width='20' height='20' fill='%2322c55e'/%3E%3Crect x='30' y='30' width='20' height='20' fill='%2322c55e'/%3E%3Crect x='50' y='30' width='20' height='20' fill='%2322c55e'/%3E%3Crect x='50' y='50' width='20' height='20' fill='%2322c55e'/%3E%3Crect x='50' y='70' width='20' height='20' fill='%2322c55e'/%3E%3C/svg%3E";
 
-  const SnakeApp: React.FC = () => {
+const SnakeApp: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [snake, setSnake] = useState([{ x: 200, y: 200 }]);
   const [food, setFood] = useState({ x: 100, y: 100 });
@@ -148,16 +148,15 @@ import { TbRuler2Off } from "react-icons/tb";
       <>
         <button
           onClick={() => !visible && setVisible(true)}
-          className={"snake-button" + (visible ? " snake-button--open" : "")}
+          className="snake-button"
           aria-label="Open Snake Game"
-          tabIndex={visible ? -1 : 0}
         >
-          🐍
+          <img src={snakeLogo} alt="Snake Logo" className="snake-logo" />
         </button>
         {visible && (
-          <div className="snake-game-overlay">
+          <div className="snake-modal">
             <button
-              className="close-btn"
+              className="snake-close-btn"
               onClick={() => setVisible(false)}
               aria-label="Close Snake Game"
             >

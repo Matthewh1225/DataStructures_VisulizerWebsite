@@ -20,34 +20,16 @@ export default function YoutubeAppWindow() {
     <div>
       <button
         onClick={() => setOpen(true)}
-        style={{
-          background: 'none',
-          border: 'none',
-          padding: 0,
-          margin: 0,
-          boxShadow: 'none',
-          cursor: 'pointer',
-        }}
+        className="youtube-button"
       >
         <img src={youtubelogo} alt="Youtube Logo" className="youtube-logo" />
       </button>
       {open && (
-        <div style={{
-            position: 'fixed',
-            top: '10%',
-            left: '10%',
-            width: '50vw',
-            height: '50vh',
-            border: '2px solid #888',
-            borderRadius: '8px',
-            zIndex: 1000,
-            boxShadow: '0 0 20px #000',
-            background: 'transparent',
-        }}>
-          <button style={{ float: 'right', margin: 8 }} onClick={() => setOpen(false)}>X</button>
+        <div className="youtube-modal">
+          <button className="youtube-close-btn" onClick={() => setOpen(false)}>X</button>
           <iframe
-            src="https://web.archive.org/web/200150101000000/https://www.youtube.com/"
-            style={{ width: '100%', height: '95%', border: 'none' }}
+            src="https://web.archive.org/web/20100101000000/https://www.youtube.com/"
+            className="youtube-iframe"
           />
         </div>
       )}

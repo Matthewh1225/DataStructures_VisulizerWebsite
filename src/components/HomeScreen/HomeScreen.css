@@ -10,9 +10,9 @@
 }
 .Youtube-App-Container {
     background: transparent;
-    position: absolute;
-    top: 30px;
-    left: 10px;
+    position: fixed;
+    top: 300px;
+    left: 100px;
     z-index: 50;
     display: flex;
     flex-direction: column;
@@ -21,18 +21,26 @@
 }
 .youtube-text {
     font-size: 1em;
+    top: 150px;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     margin-bottom: 2px;
     padding: 0 20px;
 }
-.Snake-App-Container {
-    /* styles removed to allow SnakeApp overlay to control positioning */
+.SnakeAppContainer {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .snake-text {
-    position: fixed;
-    top: 28%;
-    left: 2%;
+    position: relative;
+    right: 680px;
+    top: 200px;
     font-size: 1em;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
